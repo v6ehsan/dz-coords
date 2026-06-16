@@ -17,6 +17,10 @@
 ![License](https://img.shields.io/badge/License-MIT-c46fff?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-1.0.0-9947E8?style=for-the-badge)
 
+---
+
+![DZTeam Coords Preview](https://i.postimg.cc/SszR6k9p/dz-coords.png)
+
 </div>
 
 ---
