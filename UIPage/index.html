@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DZTeam Coords</title>
+
+    <!-- Main stylesheet — all visual design lives in main.css -->
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<!--
+    BODY is hidden by default (display:none in CSS).
+    main.js sets it to display:block once coordinate data
+    arrives via the 'message' event from Lua's SendNUIMessage.
+-->
+<body>
+
+    <!--
+        WRAPPER  #dzWrap
+        Full-screen flex container that centres the modal.
+        The two ambient purple "orb" glows are CSS ::before / ::after
+        pseudo-elements on this element.
+    -->
+    <div class="dz-wrap" id="dzWrap">
+
+        <!--
+            MODAL  #dzModal
+            The frosted-glass card — all UI lives inside here.
+            Entry animation (dzPop) is triggered when the element renders.
+        -->
+        <div class="dz-modal" id="dzModal">
+
+            <!-- Animated highlight line at the very top of the card -->
+            <div class="dz-shimmer"></div>
+
+            <!--
+                HEADER
+                Three columns: logo tile | brand + subtitle | close button
+            -->
+            <div class="dz-header">
+
+                <!-- Logo tile with a pulsing dot badge in the corner -->
+                <div class="dz-logo">
+                    <div class="dz-logo-inner">
+                        <img src="img/logo.png" class="dz-logo-img" alt="DZTeam" />
+                    </div>
+                    <div class="dz-logo-dot"></div>
+                </div>
+
+                <!-- Brand name and sub-label -->
+                <div class="dz-title-col">
+                    <div class="dz-brand">
+                        <!-- .dz-purple colours only the "DZ" prefix -->
+                        <span class="dz-purple">DZ</span>Team
+                    </div>
+                    <div class="dz-sub">Coordinate System</div>
+                </div>
+
+                <!-- Close button — wired to closeUI() in main.js -->
+                <button class="dz-close" id="dzClose">✕</button>
+            </div>
+
+            <!-- 1 px purple gradient divider below the header -->
+            <div class="dz-div"></div>
+
+            <!--
+                BODY  #dzBody
+                Dynamically populated by main.js with:
+                  - Group headers  (.dz-grp)
+                  - Coordinate rows (.dz-row)
+                Cleared on every open to prevent stale data.
+            -->
+            <div class="dz-body" id="dzBody">
+                <!-- Content injected here by makeGroup() and makeRow() in main.js -->
+            </div>
+
+            <!--
+                FOOTER
+                Left: keyboard hints  |  Right: "Live" status indicator
+            -->
+            <div class="dz-footer">
+                <span class="dz-keys">
+                    <span class="dz-kbd">ESC</span> close &nbsp;·&nbsp; click to copy
+                </span>
+                <span class="dz-live">
+                    <span class="dz-dot"></span>Live
+                </span>
+            </div>
+
+        </div><!-- /.dz-modal -->
+    </div><!-- /.dz-wrap -->
+
+    <!--
+        Main JavaScript — loaded at the end of <body> so all
+        DOM elements above are already parsed when the script runs.
+    -->
+    <script src="main.js"></script>
+</body>
+</html>
