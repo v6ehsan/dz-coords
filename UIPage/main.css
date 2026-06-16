@@ -1,0 +1,438 @@
+/* ============================================================<DZ/>
+   DZTeam | Coordinate System — Stylesheet
+   Author  : v6 EhSaN
+   Team    : DZTeam
+   Version : 1.0.0
+   GitHub  : https://github.com/DZTeamStudio
+   Discord : https://discord.gg/53HkRrvzks
+   <DZ/>============================================================ */
+
+
+/* ── Global Reset ────────────────────────────────────────────<DZ/>
+   Zero out margin/padding, enforce border-box sizing, set the
+   base font stack, and prevent text selection across the UI.  */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    user-select: none;   /* prevents accidental text highlighting */
+}
+
+/* ── Body ────────────────────────────────────────────────────<DZ/>
+   Hidden by default; shown via JS when the UI is opened.
+   Transparent background so the game world is visible.        */
+body {
+    display: none;
+    background: transparent;
+    overflow: hidden;
+}
+
+
+/* ============================================================<DZ/>
+   WRAPPER  (.dz-wrap)
+   Full-screen overlay that centres the modal in the viewport.
+   The ::before / ::after pseudo-elements create the two
+   animated purple ambient-light "orbs" visible behind the modal.
+   <DZ/>============================================================ */
+.dz-wrap {
+    position: fixed;
+    inset: 0;                  /* shorthand for top/right/bottom/left: 0 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Orb base styles ─────────────────────────────────────────<DZ/>
+   Both orbs use heavy blur to mimic a soft light source.
+   pointer-events:none ensures they never block clicks.         */
+.dz-wrap::before,
+.dz-wrap::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(100px);
+    animation: dzOrb 8s ease-in-out infinite;
+}
+
+/* Left orb — positioned off-screen left, mid-height */
+.dz-wrap::before {
+    width: 400px; height: 400px;
+    left: -100px; top: 20%;
+    background: radial-gradient(circle, rgba(153,71,232,.25) 0%, transparent 70%);
+    animation-delay: 0s;
+}
+
+/* Right orb — offset in time (-4s) so the two orbs drift out of phase */
+.dz-wrap::after {
+    width: 350px; height: 350px;
+    right: -80px; bottom: 10%;
+    background: radial-gradient(circle, rgba(106,15,212,.2) 0%, transparent 70%);
+    animation-delay: -4s;
+}
+
+/* Gentle float animation shared by both orbs */
+@keyframes dzOrb {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50%      { transform: translate(-15px, -25px) scale(1.15); }
+}
+
+
+/* ============================================================<DZ/>
+   MODAL  (.dz-modal)
+   The main card — frosted-glass effect via backdrop-filter.
+   Sharp corners (border-radius:0) for the DZTeam aesthetic.
+   <DZ/>============================================================ */
+.dz-modal {
+    position: relative;
+    width: 520px;
+    max-width: 90vw;                          /* responsive on narrow screens */
+    background: rgba(20, 10, 35, 0.65);       /* deep purple, semi-transparent */
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 0px;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    overflow: hidden;
+    animation: dzPop .45s cubic-bezier(.16,1,.3,1) both;   /* spring entry */
+}
+
+/* Subtle glass highlight gradient overlaid on the card */
+.dz-modal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(255,255,255,.1) 0%,
+        rgba(255,255,255,.03) 35%,
+        transparent 65%);
+    border-radius: 0px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Modal entrance animation: fade-in + slight upward slide + gentle scale */
+@keyframes dzPop {
+    from { opacity: 0; transform: translateY(20px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0)   scale(1);   }
+}
+
+
+/* ============================================================<DZ/>
+   SHIMMER BAR  (.dz-shimmer)
+   A 2 px animated gradient line at the very top of the card
+   that sweeps a bright highlight from right to left.
+   <DZ/>============================================================ */
+.dz-shimmer {
+    position: relative; z-index: 2; height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(153,71,232,.5) 20%,
+        rgba(220,180,255,1) 50%,   /* bright white-purple peak */
+        rgba(153,71,232,.5) 80%,
+        transparent 100%);
+    background-size: 200% 100%;    /* oversized so the sweep travels far */
+    animation: dzShim 4s linear infinite;
+}
+
+@keyframes dzShim {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+}
+
+
+/* ============================================================<DZ/>
+   HEADER  (.dz-header)
+   Flex row: logo | title column | close button
+   <DZ/>============================================================ */
+.dz-header {
+    position: relative; z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px 18px;
+}
+
+
+/* ── Logo Container ──────────────────────────────────────────<DZ/>
+   Square glassy tile housing the logo image.
+   The .dz-logo-dot badge pulses in the bottom-right corner.   */
+.dz-logo {
+    position: relative;
+    width: 56px; height: 56px;
+    flex-shrink: 0;
+}
+.dz-logo-inner {
+    width: 56px; height: 56px;
+    border-radius: 0px;
+    background: linear-gradient(135deg, rgba(153,71,232,.6), rgba(80,20,160,.7));
+    backdrop-filter: blur(10px);
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.dz-logo-img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+/* Pulsing purple dot — bottom-right corner of the logo tile */
+.dz-logo-dot {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 0px;
+    background: #9947E8;
+    bottom: -2px; right: -2px;
+    animation: dzDot 2s ease-in-out infinite;
+}
+@keyframes dzDot {
+    0%,100% { transform: scale(1); opacity: 0.8; }
+    50%      { transform: scale(1.3); opacity: 1; }
+}
+
+
+/* ── Title Column ────────────────────────────────────────────<DZ/>
+   Two-line block: brand name + sub-label                      */
+.dz-title-col { flex: 1; }
+
+.dz-brand {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: .5px;
+}
+/* Accent colour for the "DZ" prefix in the brand name */
+.dz-purple { color: #c46fff; }
+
+.dz-sub {
+    font-size: 11px;
+    color: rgba(200,170,255,.5);
+    margin-top: 4px;
+    letter-spacing: 1.5px;     /* wide tracking for the subtitle */
+}
+
+
+/* ── Close Button ────────────────────────────────────────────<DZ/>
+   Square button, turns red on hover as a clear close affordance */
+.dz-close {
+    width: 36px; height: 36px;
+    border-radius: 0px;
+    background: rgba(255,255,255,.06);
+    border: none !important;
+    color: rgba(255,255,255,.5);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+}
+.dz-close:hover {
+    background: rgba(200,40,40,.3);
+    color: #fff;
+}
+
+
+/* ============================================================<DZ/>
+   DIVIDER  (.dz-div)
+   1 px decorative horizontal rule below the header.
+   Uses the same purple gradient palette as the shimmer bar.
+   <DZ/>============================================================ */
+.dz-div {
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(153,71,232,.4) 20%,
+        rgba(220,180,255,.7) 50%,
+        rgba(153,71,232,.4) 80%,
+        transparent);
+}
+
+
+/* ============================================================<DZ/>
+   BODY  (.dz-body)
+   Scrollable content area that holds group headers and rows.
+   <DZ/>============================================================ */
+.dz-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative; z-index: 1;
+}
+
+
+/* ── Group Header  (.dz-grp) ─────────────────────────────────<DZ/>
+   Section label (e.g. "Coords", "Precise") with a trailing
+   gradient rule that fills the remaining width.               */
+.dz-grp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    color: rgba(200,170,255,.5);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 8px 0 4px;
+}
+/* Flex-grown rule line to the right of the label */
+.dz-grp::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(153,71,232,.3), transparent);
+}
+
+
+/* ============================================================<DZ/>
+   COORDINATE ROW  (.dz-row)
+   Interactive row: tag | value | copy icon
+   Slides right on hover; flashes green on successful copy.
+   <DZ/>============================================================ */
+.dz-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 0px;
+    background: rgba(255,255,255,.05);
+    cursor: pointer;
+    transition: all .2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glass sheen overlay — fades in on hover */
+.dz-row::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,.08) 0%, transparent 55%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s;
+}
+
+/* Hover: purple tint + 6 px rightward nudge */
+.dz-row:hover {
+    background: rgba(153,71,232,.15);
+    transform: translateX(6px);
+}
+.dz-row:hover::before { opacity: 1; }
+
+/* ── Copied state (.dz-ok) ───────────────────────────────────<DZ/>
+   Applied for 200 ms after the player copies a value.         */
+.dz-row.dz-ok {
+    background: rgba(255,255,255,.1);
+    animation: dzFlash .4s ease;
+}
+@keyframes dzFlash {
+    0%   { background: rgba(255,255,255,.05); }
+    40%  { background: rgba(200,160,255,.2); }
+    100% { background: rgba(255,255,255,.1); }
+}
+
+
+/* ── Format Label  (.dz-tag) ─────────────────────────────────<DZ/>
+   Purple pill badge showing the coordinate format name.
+   Monospace font for alignment with the value column.         */
+.dz-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(153,71,232,.2);
+    border: none !important;
+    color: rgba(200,160,255,1);
+    padding: 5px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-family: 'Courier New', monospace;
+}
+
+
+/* ── Coordinate Value  (.dz-val) ─────────────────────────────<DZ/>
+   The actual number string — monospace, soft white.           */
+.dz-val {
+    flex: 1;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: rgba(240,230,255,.85);
+    line-height: 1.4;
+    word-break: break-all;
+    font-weight: 500;
+}
+
+
+/* ── Copy / Check Icon  (.dz-ico) ───────────────────────────<DZ/>
+   Low opacity at rest; full opacity on hover and after copy.  */
+.dz-ico {
+    font-size: 16px;
+    opacity: .3;
+    color: #c46fff;
+    flex-shrink: 0;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+}
+.dz-row:hover .dz-ico { opacity: .9; }
+.dz-row.dz-ok  .dz-ico { opacity: 1; color: rgba(160,255,180,.9); }  /* green on success */
+
+
+/* ============================================================<DZ/>
+   FOOTER  (.dz-footer)
+   Two-column bar at the bottom:
+     left  — keyboard shortcut hints
+     right — "Live" status indicator
+   <DZ/>============================================================ */
+.dz-footer {
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,.02);
+    border-top: 1px solid rgba(255,255,255,.05);
+}
+
+/* Hint text: "ESC close · click to copy" */
+.dz-keys {
+    font-size: 10px;
+    color: rgba(255,255,255,.25);
+}
+/* Inline keyboard key badge */
+.dz-kbd {
+    display: inline-block;
+    background: rgba(255,255,255,.08);
+    padding: 2px 8px;
+    color: rgba(255,255,255,.4);
+    font-family: monospace;
+    font-size: 9px;
+}
+
+/* "Live" status chip — dot + text */
+.dz-live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: rgba(200,170,255,.5);
+}
+
+/* Pulsing square dot next to "Live" */
+.dz-dot {
+    width: 6px; height: 6px;
+    border-radius: 0px;
+    background: #9947E8;
+    animation: dzLive 2s ease-in-out infinite;
+}
+@keyframes dzLive {
+    0%,100% { opacity: .5; }
+    50%      { opacity: 1; }
+}
