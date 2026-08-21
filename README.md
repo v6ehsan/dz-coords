@@ -15,25 +15,39 @@
 ![FiveM](https://img.shields.io/badge/FiveM-Compatible-9947E8?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PC9zdmc+)
 ![Lua](https://img.shields.io/badge/Lua-5.4-2C2D72?style=for-the-badge&logo=lua&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-c46fff?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-1.0.0-9947E8?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.0.0-9947E8?style=for-the-badge)
 
 ---
 
 ![DZTeam Coords Preview](https://i.postimg.cc/SszR6k9p/dz-coords.png)
 
+### 🎬 [Watch the v2.0.0 Showcase Video](https://youtu.be/AeJc1kOh-FA)
+
 </div>
+
+---
+
+## 🆕 What's New in v2.0.0
+
+- ➕ **New coordinate format(s) added** to the panel alongside the existing six
+- 🎨 **Redesigned UI** — refreshed layout and visual polish for a cleaner, more modern look
+- ⚡ **Performance optimizations** — smoother animations and lighter resource usage
+- 🐛 General stability and bug fixes carried over from v1 feedback
+
+> Coming from v1? Your `core` configuration in `Lua/CMain.lua` still works the same way — no breaking changes to setup.
 
 ---
 
 ## ✨ Features
 
 - **One-key access** — press `F5` (rebindable) or type `/coords` to open the UI
-- **Multiple formats** — `vector3`, `vector4`, `x/y/z` and high-precision variants, all in one panel
+- **Multiple formats** — `vector3`, `vector4`, `x/y/z`, and high-precision variants, plus the new format added in v2, all in one panel
 - **Click to copy** — click any row to instantly copy it to your clipboard
 - **In-game notification** — confirms what was copied via ESX, QBCore, or native GTA V help text
-- **Frosted-glass UI** — animated purple shimmer, ambient orb glows, smooth spring entrance
+- **Frosted-glass UI** — animated purple shimmer, ambient orb glows, smooth spring entrance, now refined with v2's visual pass
 - **Zero dependencies** — no external libraries; pure Lua + vanilla JS
 - **Framework-agnostic** — works standalone, with ESX, or with QBCore out of the box
+- **Optimized runtime** — reduced overhead compared to v1
 
 ---
 
@@ -65,6 +79,8 @@ dz-coords/
    ```
 
 4. **Restart** your server — the resource will start automatically.
+
+> ⬆️ **Upgrading from v1?** Simply replace the old `dz-coords` folder with the new one and restart your server. No config changes required.
 
 ---
 
@@ -98,7 +114,7 @@ That's the only setting you need to change. Everything else works out of the box
 
 ## 📐 Coordinate Formats
 
-The panel displays your current position in six ready-to-paste formats:
+The panel now displays your current position in more ready-to-paste formats:
 
 | Label | Example Output |
 |-------|---------------|
@@ -108,6 +124,7 @@ The panel displays your current position in six ready-to-paste formats:
 | `xyzh` | `x=123.45, y=-678.90, z=34.56, h=270.00` |
 | `vec3` *(precise)* | `vec3(123.4500, -678.9000, 34.5600)` |
 | `vec4` *(precise)* | `vec4(123.4500, -678.9000, 34.5600, 270.0000)` |
+| 🆕 *new format* | *added in v2.0.0* |
 
 Standard rows use **2 decimal places**; Precise rows use **4 decimal places**.
 
@@ -140,15 +157,16 @@ Player presses F5
 
 ---
 
-## 🎨 UI Overview
+## 🎨 UI Overview (v2 Redesign)
 
 | Element | Description |
 |---------|-------------|
 | **Shimmer bar** | Animated gradient line sweeping across the top of the card |
 | **Ambient orbs** | Two blurred purple glows that float behind the modal |
 | **Logo tile** | Displays `img/logo.png` with a pulsing corner dot |
-| **Coordinate rows** | Click-to-copy rows with hover slide + green flash on success |
+| **Coordinate rows** | Click-to-copy rows with hover slide + green flash on success, now including the new v2 format row |
 | **Live indicator** | Pulsing dot in the footer confirming real-time position data |
+| **Refreshed styling** | Updated spacing, contrast, and animation timing for a crisper, faster-feeling panel |
 
 ---
 
@@ -159,6 +177,19 @@ Player presses F5
 | FiveM server | ✅ | `fx_version 'cerulean'` or higher |
 | `es_extended` | ❌ Optional | Only if `core = 'esx'` |
 | `qb-core` | ❌ Optional | Only if `core = 'qb'` |
+
+---
+
+## 📝 Changelog
+
+### v2.0.0
+- Added a new coordinate format to the panel
+- Redesigned and polished the UI/UX
+- Optimized client-side performance and reduced overhead
+- Minor bug fixes and stability improvements
+
+### v1.0.0
+- Initial release
 
 ---
 
@@ -191,19 +222,20 @@ DZTeam offers both **ready-made paid resources** and **fully custom script devel
 
 Script previews, tutorials, and showcases are posted regularly on our channel.
 
-> 👉 **[youtube.com/@DZTeamStudio](https://www.youtube.com/@DZTeamStudio)**
+- ▶️ **v2.0.0 Showcase:** [youtu.be/AeJc1kOh-FA](https://youtu.be/AeJc1kOh-FA)
+- 📡 **Channel:** [youtube.com/@DZTeamStudio](https://www.youtube.com/@DZTeamStudio)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — you are free to use, modify, and distribute it.  
+This project is licensed under the **MIT License** — you are free to use, modify, and distribute it.
 Please keep the author and team credits intact.
 
 ---
 
 <div align="center">
 
-*Made with 💜 by **v6 EhSaN** · [DZTeam](https://github.com/DZTeamStudio) · [Discord](https://discord.gg/53HkRrvzks) · [YouTube](https://www.youtube.com/@DZTeamStudio)*
+*Made with 💜 by **v6 EhSaN** · [DZTeam](https://github.com/v6ehsan) · [Discord](https://discord.gg/53HkRrvzks) · [YouTube](https://www.youtube.com/@DZTeamStudio)*
 
 </div>
