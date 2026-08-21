@@ -236,6 +236,6 @@ Please keep the author and team credits intact.
 
 <div align="center">
 
-*Made with 💜 by **v6 EhSaN** · [DZTeam](https://github.com/v6ehsan) · [Discord](https://discord.gg/53HkRrvzks) · [YouTube](https://www.youtube.com/@DZTeamStudio)*
+*Made with 💜 by **v6 EhSaN** · [DZTeam](https://github.com/DZTeamStudio) · [Discord](https://discord.gg/53HkRrvzks) · [YouTube](https://www.youtube.com/@DZTeamStudio)*
 
 </div>
