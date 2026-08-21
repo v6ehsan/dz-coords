@@ -203,11 +203,13 @@ window.addEventListener('message', function (event) {
     body.appendChild(makeRow('vector4', 'vector4(' + f2(x) + ', ' + f2(y) + ', ' + f2(z) + ', ' + f2(h) + ')'));
     body.appendChild(makeRow('x,y,z',   'x=' + f2(x) + ', y=' + f2(y) + ', z=' + f2(z)));
     body.appendChild(makeRow('xyzh',    'x=' + f2(x) + ', y=' + f2(y) + ', z=' + f2(z) + ', h=' + f2(h)));
+    body.appendChild(makeRow('json',    JSON.stringify({ x: parseFloat(f2(x)), y: parseFloat(f2(y)), z: parseFloat(f2(z)), h: parseFloat(f2(h)) })));
 
     // — High precision section —
     body.appendChild(makeGroup('Precise'));
     body.appendChild(makeRow('vec3', 'vec3(' + f4(x) + ', ' + f4(y) + ', ' + f4(z) + ')'));
     body.appendChild(makeRow('vec4', 'vec4(' + f4(x) + ', ' + f4(y) + ', ' + f4(z) + ', ' + f4(h) + ')'));
+    body.appendChild(makeRow('vec3+h', 'vec3(' + f4(x) + ', ' + f4(y) + ', ' + f4(z) + ') -- heading: ' + f2(h)));
 
     // Make the page visible now that content is ready
     document.body.style.display = 'block';
