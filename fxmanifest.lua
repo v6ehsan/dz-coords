@@ -2,7 +2,7 @@
 --  DZTeam | Coordinate System — Resource Manifest
 --  Author  : v6 EhSaN
 --  Team    : DZTeam
---  GitHub  : https://github.com/DZTeamStudio
+--  GitHub  : https://github.com/v6ehsan
 --  Discord : https://discord.gg/53HkRrvzks
 --  YouTube : https://www.youtube.com/@DZTeamStudio
 -- ============================================================<DZ/>
@@ -21,7 +21,7 @@ game 'gta5'
 -- ── Metadata ─────────────────────────────────────────────────<DZ/>
 -- Displayed in the server console and resource list.
 -- Does not affect functionality.
-author 'DZTeam'
+author 'v6ehsan'
 
 -- ============================================================<DZ/>
 --  CLIENT SCRIPT
