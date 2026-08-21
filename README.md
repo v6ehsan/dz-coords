@@ -19,7 +19,7 @@
 
 ---
 
-![DZTeam Coords Preview]([https://i.postimg.cc/SszR6k9p/dz-coords.png](https://i.postimg.cc/GpDNFqzB/ssssss.png))
+![DZTeam Coords Preview]([https://i.postimg.cc/GpDNFqzB/ssssss.png])
 
 ### 🎬 [Watch the v2.0.0 Showcase Video](https://youtu.be/AeJc1kOh-FA)
 
